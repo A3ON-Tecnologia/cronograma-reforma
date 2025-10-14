@@ -1866,21 +1866,31 @@
     </div>
 
     <script>
-        // ========== EFEITO DE DIGITAÇÃO NO TÍTULO ==========
+        // ========== EFEITO DE DIGITAÇÃO NO TÍTULO (LOOP) ==========
         const titleElement = document.getElementById('page-title');
         const titleText = 'Cronograma para a Reforma Tributária';
         let charIndex = 0;
+        let isDeleting = false;
 
         function typeWriter() {
-            if (charIndex < titleText.length) {
+            if (!isDeleting && charIndex < titleText.length) {
+                // Digitando
                 titleElement.textContent += titleText.charAt(charIndex);
                 charIndex++;
                 setTimeout(typeWriter, 80); // Velocidade de digitação (80ms por caractere)
-            } else {
-                // Remove o cursor piscante após terminar
-                setTimeout(() => {
-                    titleElement.classList.add('typing-complete');
-                }, 500);
+            } else if (!isDeleting && charIndex === titleText.length) {
+                // Terminou de digitar, aguarda antes de começar a apagar
+                isDeleting = true;
+                setTimeout(typeWriter, 2000); // Pausa de 2 segundos antes de apagar
+            } else if (isDeleting && charIndex > 0) {
+                // Apagando
+                titleElement.textContent = titleText.substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(typeWriter, 40); // Velocidade de apagar (40ms por caractere - mais rápido)
+            } else if (isDeleting && charIndex === 0) {
+                // Terminou de apagar, reinicia o ciclo
+                isDeleting = false;
+                setTimeout(typeWriter, 500); // Pausa de 0.5 segundos antes de digitar novamente
             }
         }
 
