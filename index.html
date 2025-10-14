@@ -1205,80 +1205,37 @@
             }
 
             .timeline-label {
-                font-size: 0.5rem;
+                font-size: 0.55rem;
                 letter-spacing: 0.5px;
             }
 
-            .timeline-year {
-                font-size: 1rem;
-                letter-spacing: 1px;
-            }
+    .timeline-year {
+        font-size: 0.85rem;
+        letter-spacing: 0.8px;
+    }
 
-            .container {
-                height: auto;
-                min-height: auto;
-                width: 100%;
-                padding: 20px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 18px;
-            }
+    .container {
+        display: none;
+    }
 
-            /* Oculta SVG de conexões no mobile */
-            .connections-svg {
-                display: none;
-            }
+    /* Oculta SVG de conexões no mobile */
+    .connections-svg {
+        display: none;
+    }
 
-            /* Botão central como botão retangular no mobile */
-            .central-button {
-                position: relative;
-                width: 90%;
-                max-width: 350px;
-                height: auto;
-                padding: 18px 25px;
-                border-radius: 25px;
-                font-size: 1rem;
-                font-weight: 900;
-                line-height: 1;
-                border-width: 2px;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-                box-shadow: 0 8px 25px rgba(0, 204, 102, 0.4),
-                            0 0 20px rgba(0, 204, 102, 0.2) inset;
-                white-space: nowrap;
-            }
+    /* Oculta botão central no mobile */
+    .central-button {
+        display: none;
+    }
 
-            .central-button br {
-                display: none;
-            }
+    /* Oculta botões periféricos no mobile (exceto alerta) */
+    .branch-button:not(.btn-alerta) {
+        display: none;
+    }
 
-            /* Botões periféricos em coluna */
-            .branch-button {
-                position: relative;
-                top: auto;
-                left: auto;
-                right: auto;
-                bottom: auto;
-                transform: none;
-                padding: 16px 25px;
-                font-size: 0.9rem;
-                border-radius: 25px;
-                white-space: nowrap;
-                width: 90%;
-                max-width: 350px;
-                min-width: auto;
-                text-align: center;
-                justify-content: center;
-                display: flex;
-                gap: 10px;
-            }
-
-            .branch-button .material-icons {
-                font-size: 1.3rem;
-            }
+    .branch-button .material-icons {
+        font-size: 1.3rem;
+    }
 
             /* Remove hovers específicos no mobile */
             .branch-button:hover,
