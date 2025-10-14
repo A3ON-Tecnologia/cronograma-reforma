@@ -1,0 +1,2123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reforma Tributária - Mapa Mental Interativo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <style>
+        /* ========== RESET E CONFIGURAÇÕES GLOBAIS ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #000000 url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+            padding: 5px 0 80px 0;
+        }
+
+        /* Overlay escuro sobre o background para melhor contraste */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 0;
+            pointer-events: none;
+            will-change: auto;
+        }
+
+        /* ========== TÍTULO PRINCIPAL ========== */
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #00E67A;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin-bottom: 8px;
+            margin-top: 25px;
+            position: relative;
+            z-index: 10;
+            text-shadow: 0 0 20px rgba(0, 230, 122, 0.8),
+                         0 0 40px rgba(0, 230, 122, 0.5);
+            min-height: 3rem;
+        }
+
+        /* Cursor piscante para efeito de digitação */
+        .page-title::after {
+            content: '|';
+            animation: blink 0.7s infinite;
+            margin-left: 5px;
+        }
+
+        .page-title.typing-complete::after {
+            display: none;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* ========== FAIXA DE TIMELINE ========== */
+        .timeline-strip {
+            width: 100%;
+            display: flex;
+            height: 60px;
+            margin: 0;
+            margin-top: 20px;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            overflow: visible;
+        }
+
+        .timeline-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 8px 10px;
+            font-family: 'Orbitron', sans-serif;
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                         0 0 20px currentColor,
+                         0 2px 5px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Desktop: Timeline abre modais */
+        @media (min-width: 769px) {
+            .timeline-item.active {
+                transform: scale(1.05);
+                filter: brightness(1.3);
+                z-index: 30;
+            }
+        }
+
+        .timeline-item:first-child {
+            border-radius: 5px 0 0 5px;
+        }
+
+        .timeline-item:last-child {
+            border-radius: 0 5px 5px 0;
+        }
+
+        .timeline-item:hover {
+            transform: scale(1.05);
+            z-index: 20;
+            filter: brightness(1.2);
+        }
+
+        .timeline-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            opacity: 0.95;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+            color: white;
+        }
+
+        .timeline-year {
+            font-size: 1.1rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: white;
+        }
+
+        /* ========== SEÇÃO DE DESCRIÇÃO ========== */
+        .description-section {
+            width: 100%;
+            max-width: 1400px;
+            margin: 60px auto;
+            padding: 0 40px;
+            z-index: 10;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .description-content {
+            background: linear-gradient(145deg, rgba(10, 10, 10, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);
+            border: 2px solid rgba(0, 230, 122, 0.3);
+            border-radius: 20px;
+            padding: 60px 80px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6),
+                        0 0 30px rgba(0, 230, 122, 0.1);
+            backdrop-filter: blur(10px);
+            width: 100%;
+        }
+
+        .description-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #00E67A;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 35px;
+            text-shadow: 0 0 20px rgba(0, 230, 122, 0.6);
+        }
+
+        .description-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.15rem;
+            line-height: 2;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .description-text:last-child {
+            margin-bottom: 0;
+        }
+
+        .description-text strong {
+            color: #00E67A;
+            font-weight: 600;
+        }
+
+        /* Cores dos períodos com efeito neon */
+        .timeline-2026 {
+            background: linear-gradient(145deg, #4A90E2 0%, #357ABD 100%);
+            border-left-color: #357ABD;
+            box-shadow: 0 0 20px rgba(74, 144, 226, 0.6),
+                        0 0 40px rgba(74, 144, 226, 0.4),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                        inset 0 -2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-2026::after {
+            border-left-color: #357ABD;
+        }
+
+        .timeline-2026:hover {
+            box-shadow: 0 0 30px rgba(74, 144, 226, 0.8),
+                        0 0 50px rgba(74, 144, 226, 0.6),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        .timeline-2027 {
+            background: linear-gradient(145deg, #B370CF 0%, #8E44AD 100%);
+            border-left-color: #8E44AD;
+            box-shadow: 0 0 20px rgba(179, 112, 207, 0.6),
+                        0 0 40px rgba(179, 112, 207, 0.4),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                        inset 0 -2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-2027::after {
+            border-left-color: #8E44AD;
+        }
+
+        .timeline-2027:hover {
+            box-shadow: 0 0 30px rgba(179, 112, 207, 0.8),
+                        0 0 50px rgba(179, 112, 207, 0.6),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        .timeline-2028 {
+            background: linear-gradient(145deg, #FFB347 0%, #E67E22 100%);
+            border-left-color: #E67E22;
+            box-shadow: 0 0 20px rgba(255, 179, 71, 0.6),
+                        0 0 40px rgba(255, 179, 71, 0.4),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                        inset 0 -2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-2028::after {
+            border-left-color: #E67E22;
+        }
+
+        .timeline-2028:hover {
+            box-shadow: 0 0 30px rgba(255, 179, 71, 0.8),
+                        0 0 50px rgba(255, 179, 71, 0.6),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        .timeline-2030 {
+            background: linear-gradient(145deg, #00E67A 0%, #00994d 100%);
+            border-left-color: #00994d;
+            box-shadow: 0 0 20px rgba(0, 230, 122, 0.6),
+                        0 0 40px rgba(0, 230, 122, 0.4),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                        inset 0 -2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-2030::after {
+            border-left-color: #00994d;
+        }
+
+        .timeline-2030:hover {
+            box-shadow: 0 0 30px rgba(0, 230, 122, 0.8),
+                        0 0 50px rgba(0, 230, 122, 0.6),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        /* ========== CONTAINER PRINCIPAL ========== */
+        .container {
+            display: none;
+        }
+
+        /* Desktop: esconde botões */
+        @media (min-width: 769px) {
+            .central-button,
+            .branch-button:not(.btn-alerta) {
+                display: none;
+            }
+
+            .connections-svg {
+                display: none;
+            }
+        }
+
+        /* ========== BOTÃO CENTRAL ========== */
+        .central-button {
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            background: linear-gradient(145deg, #1a1a1a, #000000);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 900;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1.5px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 204, 102, 0.3),
+                        0 0 30px rgba(0, 204, 102, 0.2) inset;
+            cursor: pointer;
+            z-index: 10;
+            transition: transform 0.3s ease;
+            border: 2px solid rgba(0, 204, 102, 0.3);
+        }
+
+        .central-button:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+
+        /* ========== BOTÕES PERIFÉRICOS ========== */
+        .branch-button {
+            position: absolute;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1.5px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .branch-button .material-icons {
+            font-size: 1.3rem;
+        }
+
+        .branch-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Hover específico para cada botão mantendo o alinhamento */
+        .btn-2026:hover {
+            transform: translateX(-50%) translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(74, 144, 226, 0.8),
+                        0 6px 18px rgba(74, 144, 226, 0.6),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                        inset 0 -2px 10px rgba(0, 0, 0, 0.2),
+                        0 0 50px rgba(74, 144, 226, 0.6);
+            border-color: rgba(255, 255, 255, 0.7);
+            filter: brightness(1.15) saturate(1.2);
+        }
+
+        .btn-2027:hover {
+            transform: translateY(-50%) translateX(5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(155, 89, 182, 0.8),
+                        0 6px 18px rgba(155, 89, 182, 0.6),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                        inset 0 -2px 10px rgba(0, 0, 0, 0.2),
+                        0 0 50px rgba(155, 89, 182, 0.6);
+            border-color: rgba(255, 255, 255, 0.7);
+            filter: brightness(1.15) saturate(1.2);
+        }
+
+        .btn-2028:hover {
+            transform: translateX(-50%) translateY(5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(243, 156, 18, 0.8),
+                        0 6px 18px rgba(243, 156, 18, 0.6),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                        inset 0 -2px 10px rgba(0, 0, 0, 0.2),
+                        0 0 50px rgba(243, 156, 18, 0.6);
+            border-color: rgba(255, 255, 255, 0.7);
+            filter: brightness(1.15) saturate(1.2);
+        }
+
+        .btn-2030:hover {
+            transform: translateY(-50%) translateX(-5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(0, 204, 102, 0.8),
+                        0 6px 18px rgba(0, 204, 102, 0.6),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                        inset 0 -2px 10px rgba(0, 0, 0, 0.2),
+                        0 0 50px rgba(0, 204, 102, 0.6);
+            border-color: rgba(255, 255, 255, 0.7);
+            filter: brightness(1.15) saturate(1.2);
+        }
+
+        /* Animação de pulsação - DESATIVADA para performance */
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+            50% {
+                box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        /* Cores e posições dos botões - Formando um quadrado perfeito (ordem horária) */
+        .btn-2026 {
+            background: linear-gradient(145deg, #5BA3F5 0%, #4A90E2 50%, #357ABD 100%);
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.6),
+                        0 4px 12px rgba(74, 144, 226, 0.4),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                        inset 0 -2px 10px rgba(0, 0, 0, 0.2),
+                        0 0 35px rgba(74, 144, 226, 0.4);
+            overflow: hidden;
+        }
+
+        /* Efeito de brilho superior no botão 2026 */
+        .btn-2026::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(180deg, 
+                rgba(255, 255, 255, 0.5) 0%, 
+                rgba(255, 255, 255, 0.15) 50%, 
+                transparent 100%);
+            border-radius: 25px 25px 0 0;
+            pointer-events: none;
+        }
+
+        /* Brilho animado deslizante no botão 2026 - DESATIVADO para performance */
+
+        .btn-2027 {
+            background: linear-gradient(145deg, #B370CF 0%, #9B59B6 50%, #8E44AD 100%);
+            top: 50%;
+            right: 5%;
+            transform: translateY(-50%);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 25px rgba(155, 89, 182, 0.6),
+                        0 4px 12px rgba(155, 89, 182, 0.4),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                        inset 0 -2px 10px rgba(0, 0, 0, 0.2),
+                        0 0 35px rgba(155, 89, 182, 0.4);
+            overflow: hidden;
+        }
+
+        /* Efeito de brilho superior no botão 2027 */
+        .btn-2027::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(180deg, 
+                rgba(255, 255, 255, 0.5) 0%, 
+                rgba(255, 255, 255, 0.15) 50%, 
+                transparent 100%);
+            border-radius: 25px 25px 0 0;
+            pointer-events: none;
+        }
+
+        /* Brilho animado deslizante no botão 2027 - DESATIVADO para performance */
+
+        .btn-2028 {
+            background: linear-gradient(145deg, #FFB347 0%, #F39C12 50%, #E67E22 100%);
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 25px rgba(243, 156, 18, 0.6),
+                        0 4px 12px rgba(243, 156, 18, 0.4),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                        inset 0 -2px 10px rgba(0, 0, 0, 0.2),
+                        0 0 35px rgba(243, 156, 18, 0.4);
+            overflow: hidden;
+        }
+
+        /* Efeito de brilho superior no botão 2028 */
+        .btn-2028::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(180deg, 
+                rgba(255, 255, 255, 0.5) 0%, 
+                rgba(255, 255, 255, 0.15) 50%, 
+                transparent 100%);
+            border-radius: 25px 25px 0 0;
+            pointer-events: none;
+        }
+
+        /* Brilho animado deslizante no botão 2028 - DESATIVADO para performance */
+
+        .btn-2030 {
+            background: linear-gradient(145deg, #00E67A 0%, #00cc66 50%, #00994d 100%);
+            top: 50%;
+            left: 5%;
+            transform: translateY(-50%);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 25px rgba(0, 204, 102, 0.6),
+                        0 4px 12px rgba(0, 204, 102, 0.4),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                        inset 0 -2px 10px rgba(0, 0, 0, 0.2),
+                        0 0 35px rgba(0, 204, 102, 0.4);
+            overflow: hidden;
+        }
+
+        /* Efeito de brilho superior no botão 2030 */
+        .btn-2030::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(180deg, 
+                rgba(255, 255, 255, 0.5) 0%, 
+                rgba(255, 255, 255, 0.15) 50%, 
+                transparent 100%);
+            border-radius: 25px 25px 0 0;
+            pointer-events: none;
+        }
+
+        /* ========== BOTÃO DE ALERTA ========== */
+        .btn-alerta {
+            background: linear-gradient(145deg, #FF4444 0%, #CC0000 50%, #990000 100%);
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 -5px 20px rgba(255, 68, 68, 0.5),
+                        0 8px 25px rgba(255, 68, 68, 0.6),
+                        0 4px 12px rgba(255, 68, 68, 0.4),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                        inset 0 -2px 10px rgba(0, 0, 0, 0.2),
+                        0 0 35px rgba(255, 68, 68, 0.4);
+            overflow: hidden;
+            padding: 12px 26px;
+            font-size: 0.9rem;
+            font-weight: 900;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 50;
+            width: 90%;
+            max-width: 350px;
+        }
+        
+        .btn-alerta .material-icons {
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        .btn-alerta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(180deg, 
+                rgba(255, 255, 255, 0.5) 0%, 
+                rgba(255, 255, 255, 0.15) 50%, 
+                transparent 100%);
+            border-radius: 25px 25px 0 0;
+            pointer-events: none;
+        }
+
+        .btn-alerta:hover {
+            transform: translateX(-50%) translateY(-3px) scale(1.05);
+            box-shadow: 0 -5px 20px rgba(255, 68, 68, 0.5),
+                        0 12px 35px rgba(255, 68, 68, 0.8),
+                        0 6px 18px rgba(255, 68, 68, 0.6),
+                        0 0 50px rgba(255, 68, 68, 0.5);
+        }
+
+        /* ========== MODAL BASE ========== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.15s ease;
+            overflow-y: auto;
+            padding: 40px 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        /* Estilos base do modal-content */
+        .modal-content {
+            background: linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 100%);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            border: 2px solid;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-section {
+            margin-bottom: 15px;
+        }
+
+        /* ========== DESKTOP: DROPDOWNS DA TIMELINE ========== */
+        @media (min-width: 769px) {
+            /* Timeline fixa no topo */
+            .timeline-strip {
+                position: relative;
+                z-index: 50;
+            }
+
+            /* Modais da timeline como dropdown (exceto modal-all e modal-alerta) */
+            #modal-2026.active,
+            #modal-2027.active,
+            #modal-2028.active,
+            #modal-2030.active {
+                background: transparent;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 0;
+                pointer-events: none;
+                z-index: 200;
+            }
+
+            /* Conteúdo do dropdown */
+            #modal-2026 .modal-content,
+            #modal-2027 .modal-content,
+            #modal-2028 .modal-content,
+            #modal-2030 .modal-content {
+                position: fixed;
+                top: calc(25px + 60px + 8px);
+                width: 25%;
+                height: calc(100vh - 25px - 60px - 8px);
+                margin: 0;
+                padding: 25px;
+                background: linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 100%);
+                border-radius: 0 0 15px 15px;
+                border-top: 3px solid;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+                overflow-y: auto;
+                pointer-events: auto;
+                animation: slideDown 0.3s ease-out;
+                z-index: 200;
+            }
+
+            /* Posicionamento horizontal de cada modal */
+            #modal-2026 .modal-content {
+                left: 0;
+            }
+
+            #modal-2027 .modal-content {
+                left: 25%;
+            }
+
+            #modal-2028 .modal-content {
+                left: 50%;
+            }
+
+            #modal-2030 .modal-content {
+                left: 75%;
+            }
+
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
+
+        /* Container para todos os modais quando abertos juntos */
+        .all-modals-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            max-width: 96vw;
+            width: 100%;
+            margin: auto;
+            max-height: 85vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-right: 10px;
+        }
+
+        .modal-overlay.all-open {
+            align-items: flex-start;
+            padding: 30px 10px;
+            overflow-y: auto;
+        }
+
+        /* Modais dentro do grid - tamanho compacto */
+        .all-modals-container .modal-content {
+            background: linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 100%);
+            border-radius: 15px;
+            padding: 15px;
+            width: 100%;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            animation: slideUp 0.2s ease-out;
+            position: relative;
+            overflow: hidden;
+            max-height: 42vh;
+            border: 2px solid;
+            transform: translateZ(0);
+        }
+
+        /* Modal individual quando aberto sozinho - Mobile */
+        @media (max-width: 768px) {
+            .modal-overlay:not(.all-open) .modal-content {
+                background: linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 100%);
+                border-radius: 20px;
+                padding: 30px;
+                max-width: 700px;
+                width: 90%;
+                max-height: 85vh;
+                height: auto;
+                overflow: hidden;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+                animation: slideUp 0.2s ease-out;
+                position: relative;
+                border: 2px solid;
+                display: flex;
+                flex-direction: column;
+                transform: translateZ(0);
+            }
+        }
+
+        .modal-header {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px currentColor;
+            line-height: 1.2;
+            padding-right: 40px;
+        }
+
+        /* Botão X para fechar modal */
+        .modal-close-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .modal-close-btn:hover {
+            background: rgba(255, 68, 68, 0.8);
+            border-color: rgba(255, 68, 68, 1);
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 0 20px rgba(255, 68, 68, 0.6);
+        }
+
+        .modal-close-btn .material-icons {
+            font-size: 1.3rem;
+        }
+
+        .modal-section h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            text-shadow: 0 0 10px currentColor;
+        }
+
+        .modal-section h3::before {
+            content: "●";
+            margin-right: 8px;
+            font-size: 1.2rem;
+            filter: drop-shadow(0 0 8px currentColor);
+        }
+
+        .modal-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .modal-section li {
+            padding: 6px 0 6px 25px;
+            position: relative;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .modal-section li::before {
+            content: "▸";
+            position: absolute;
+            left: 10px;
+            font-weight: bold;
+            filter: drop-shadow(0 0 4px currentColor);
+        }
+
+        .close-button {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: 2px solid;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            width: 100%;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        .close-button:hover {
+            background: rgba(0, 0, 0, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px currentColor;
+            text-shadow: 0 0 10px currentColor;
+        }
+
+        /* Estilos compactos para modais no grid */
+        .all-modals-container .modal-header {
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .all-modals-container .modal-title {
+            font-size: 1.1rem;
+            font-weight: 900;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            margin-bottom: 0;
+            line-height: 1.3;
+            text-shadow: 0 0 15px currentColor;
+        }
+
+        .all-modals-container .modal-section {
+            margin-bottom: 10px;
+        }
+
+        .all-modals-container .modal-section h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 6px;
+            text-shadow: 0 0 8px currentColor;
+        }
+
+        .all-modals-container .modal-section h3::before {
+            font-size: 0.95rem;
+            margin-right: 6px;
+        }
+
+        .all-modals-container .modal-section li {
+            padding: 4px 0 4px 22px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .all-modals-container .modal-section li::before {
+            left: 6px;
+            font-size: 0.85rem;
+        }
+
+        .all-modals-container .close-button {
+            padding: 8px 18px;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        /* ========== ESTILOS ESPECÍFICOS POR MODAL (CORES NEON) ========== */
+        
+        /* Modal 2026 - Azul */
+        #modal-2026 .modal-content {
+            border-color: #4A90E2;
+            box-shadow: 0 20px 60px rgba(74, 144, 226, 0.4),
+                        0 0 40px rgba(74, 144, 226, 0.2) inset;
+        }
+
+        #modal-2026 .modal-title {
+            color: #5BA3F5;
+        }
+
+        #modal-2026 .modal-section h3 {
+            color: #4A90E2;
+        }
+
+        #modal-2026 .modal-section li::before {
+            color: #4A90E2;
+        }
+
+        #modal-2026 .close-button {
+            border-color: #4A90E2;
+            color: #5BA3F5;
+        }
+
+        /* Modal 2027 - Roxo */
+        #modal-2027 .modal-content {
+            border-color: #9B59B6;
+            box-shadow: 0 20px 60px rgba(155, 89, 182, 0.4),
+                        0 0 40px rgba(155, 89, 182, 0.2) inset;
+        }
+
+        #modal-2027 .modal-title {
+            color: #B370CF;
+        }
+
+        #modal-2027 .modal-section h3 {
+            color: #9B59B6;
+        }
+
+        #modal-2027 .modal-section li::before {
+            color: #9B59B6;
+        }
+
+        #modal-2027 .close-button {
+            border-color: #9B59B6;
+            color: #B370CF;
+        }
+
+        /* Modal 2028 - Laranja */
+        #modal-2028 .modal-content {
+            border-color: #F39C12;
+            box-shadow: 0 20px 60px rgba(243, 156, 18, 0.4),
+                        0 0 40px rgba(243, 156, 18, 0.2) inset;
+        }
+
+        #modal-2028 .modal-title {
+            color: #FFB347;
+        }
+
+        #modal-2028 .modal-section h3 {
+            color: #F39C12;
+        }
+
+        #modal-2028 .modal-section li::before {
+            color: #F39C12;
+        }
+
+        #modal-2028 .close-button {
+            border-color: #F39C12;
+            color: #FFB347;
+        }
+
+        /* Modal 2030 - Verde */
+        #modal-2030 .modal-content {
+            border-color: #00cc66;
+            box-shadow: 0 20px 60px rgba(0, 204, 102, 0.4),
+                        0 0 40px rgba(0, 204, 102, 0.2) inset;
+        }
+
+        #modal-2030 .modal-title {
+            color: #00E67A;
+        }
+
+        #modal-2030 .modal-section h3 {
+            color: #00cc66;
+        }
+
+        #modal-2030 .modal-section li::before {
+            color: #00cc66;
+        }
+
+        #modal-2030 .close-button {
+            border-color: #00cc66;
+            color: #00E67A;
+        }
+
+        /* Modal Alerta - Vermelho */
+        #modal-alerta.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #modal-alerta .modal-content {
+            border-color: #FF4444;
+            box-shadow: 0 20px 60px rgba(255, 68, 68, 0.4),
+                        0 0 40px rgba(255, 68, 68, 0.2) inset;
+            margin: auto;
+        }
+
+        #modal-alerta .modal-title {
+            color: #FF6666;
+        }
+
+        #modal-alerta .modal-section h3 {
+            color: #FF4444;
+        }
+
+        #modal-alerta .modal-section li::before {
+            color: #FF4444;
+        }
+
+        #modal-alerta .close-button {
+            border-color: #FF4444;
+            color: #FF6666;
+        }
+
+        /* ========== CORES PARA MODAIS NO GRID (TODOS ABERTOS) ========== */
+        
+        /* Modal 2026 - Azul (Grid) */
+        .modal-2026 {
+            border-color: #4A90E2 !important;
+            box-shadow: 0 15px 40px rgba(74, 144, 226, 0.4),
+                        0 0 30px rgba(74, 144, 226, 0.2) inset !important;
+        }
+
+        .modal-2026 .modal-title {
+            color: #5BA3F5;
+        }
+
+        .modal-2026 .modal-section h3 {
+            color: #4A90E2;
+        }
+
+        .modal-2026 .modal-section li::before {
+            color: #4A90E2;
+        }
+
+        .modal-2026 .close-button {
+            border-color: #4A90E2;
+            color: #5BA3F5;
+        }
+
+        /* Modal 2027 - Roxo (Grid) */
+        .modal-2027 {
+            border-color: #9B59B6 !important;
+            box-shadow: 0 15px 40px rgba(155, 89, 182, 0.4),
+                        0 0 30px rgba(155, 89, 182, 0.2) inset !important;
+        }
+
+        .modal-2027 .modal-title {
+            color: #B370CF;
+        }
+
+        .modal-2027 .modal-section h3 {
+            color: #9B59B6;
+        }
+
+        .modal-2027 .modal-section li::before {
+            color: #9B59B6;
+        }
+
+        .modal-2027 .close-button {
+            border-color: #9B59B6;
+            color: #B370CF;
+        }
+
+        /* Modal 2028 - Laranja (Grid) */
+        .modal-2028 {
+            border-color: #F39C12 !important;
+            box-shadow: 0 15px 40px rgba(243, 156, 18, 0.4),
+                        0 0 30px rgba(243, 156, 18, 0.2) inset !important;
+        }
+
+        .modal-2028 .modal-title {
+            color: #FFB347;
+        }
+
+        .modal-2028 .modal-section h3 {
+            color: #F39C12;
+        }
+
+        .modal-2028 .modal-section li::before {
+            color: #F39C12;
+        }
+
+        .modal-2028 .close-button {
+            border-color: #F39C12;
+            color: #FFB347;
+        }
+
+        /* Modal 2030 - Verde (Grid) */
+        .modal-2030 {
+            border-color: #00cc66 !important;
+            box-shadow: 0 15px 40px rgba(0, 204, 102, 0.4),
+                        0 0 30px rgba(0, 204, 102, 0.2) inset !important;
+        }
+
+        .modal-2030 .modal-title {
+            color: #00E67A;
+        }
+
+        .modal-2030 .modal-section h3 {
+            color: #00cc66;
+        }
+
+        .modal-2030 .modal-section li::before {
+            color: #00cc66;
+        }
+
+        .modal-2030 .close-button {
+            border-color: #00cc66;
+            color: #00E67A;
+        }
+
+        /* Modal Alerta - Vermelho (Grid) */
+        .modal-alerta {
+            border-color: #FF4444 !important;
+            box-shadow: 0 15px 40px rgba(255, 68, 68, 0.4),
+                        0 0 30px rgba(255, 68, 68, 0.2) inset !important;
+            grid-column: 1 / -1;
+            width: 100%;
+        }
+
+        .modal-alerta .modal-title {
+            color: #FF6666;
+        }
+
+        .modal-alerta .modal-section h3 {
+            color: #FF4444;
+        }
+
+        .modal-alerta .modal-section li::before {
+            color: #FF4444;
+        }
+
+        .modal-alerta .close-button {
+            border-color: #FF4444;
+            color: #FF6666;
+        }
+
+        /* ========== ANIMAÇÕES ========== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ========== RESPONSIVIDADE ========== */
+        
+        /* Tablets e telas médias */
+        @media (max-width: 1024px) {
+            .all-modals-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 10px;
+            }
+
+            .all-modals-container .modal-content {
+                padding: 15px;
+            }
+
+            .all-modals-container .modal-title {
+                font-size: 1.1rem;
+            }
+
+            .all-modals-container .modal-section h3 {
+                font-size: 0.95rem;
+            }
+
+            .all-modals-container .modal-section li {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Smartphones e telas pequenas */
+        @media (max-width: 768px) {
+            body {
+                overflow-x: hidden;
+                padding-top: 0;
+                overflow-y: auto;
+                padding-bottom: 30px;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+                letter-spacing: 4px;
+                margin-bottom: 20px;
+                margin-top: 30px !important;
+                padding-top: 0;
+            }
+
+            /* Timeline em mobile */
+            .timeline-strip {
+                height: 50px;
+                margin-bottom: 15px;
+            }
+
+            .timeline-label {
+                font-size: 0.5rem;
+                letter-spacing: 0.5px;
+            }
+
+            .timeline-year {
+                font-size: 1rem;
+                letter-spacing: 1px;
+            }
+
+            .container {
+                height: auto;
+                min-height: auto;
+                width: 100%;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 18px;
+            }
+
+            /* Oculta SVG de conexões no mobile */
+            .connections-svg {
+                display: none;
+            }
+
+            /* Botão central como botão retangular no mobile */
+            .central-button {
+                position: relative;
+                width: 90%;
+                max-width: 350px;
+                height: auto;
+                padding: 18px 25px;
+                border-radius: 25px;
+                font-size: 1rem;
+                font-weight: 900;
+                line-height: 1;
+                border-width: 2px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 8px 25px rgba(0, 204, 102, 0.4),
+                            0 0 20px rgba(0, 204, 102, 0.2) inset;
+                white-space: nowrap;
+            }
+
+            .central-button br {
+                display: none;
+            }
+
+            /* Botões periféricos em coluna */
+            .branch-button {
+                position: relative;
+                top: auto;
+                left: auto;
+                right: auto;
+                bottom: auto;
+                transform: none;
+                padding: 16px 25px;
+                font-size: 0.9rem;
+                border-radius: 25px;
+                white-space: nowrap;
+                width: 90%;
+                max-width: 350px;
+                min-width: auto;
+                text-align: center;
+                justify-content: center;
+                display: flex;
+                gap: 10px;
+            }
+
+            .branch-button .material-icons {
+                font-size: 1.3rem;
+            }
+
+            /* Remove hovers específicos no mobile */
+            .branch-button:hover,
+            .central-button:hover {
+                transform: translateY(-2px) scale(1.02);
+            }
+
+            /* Modais individuais em mobile */
+            .modal-overlay {
+                padding: 20px 15px;
+                overflow-y: auto;
+                align-items: flex-start;
+                padding-top: 40px;
+            }
+
+            .modal-overlay:not(.all-open) .modal-content {
+                padding: 25px 20px;
+                max-height: none;
+                height: auto;
+                overflow: visible;
+                border-radius: 15px;
+                margin-top: 0;
+            }
+
+            .modal-title {
+                font-size: 1.3rem;
+                line-height: 1.3;
+            }
+
+            .modal-section {
+                margin-bottom: 20px;
+            }
+
+            .modal-section h3 {
+                font-size: 1.05rem;
+                margin-bottom: 10px;
+            }
+
+            .modal-section li {
+                font-size: 0.9rem;
+                padding: 8px 0 8px 28px;
+                line-height: 1.5;
+            }
+
+            .close-button {
+                padding: 12px 25px;
+                font-size: 0.95rem;
+            }
+
+            /* Modal "todos" em mobile */
+            .all-modals-container {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                padding: 5px;
+                max-height: 85vh;
+                overflow-y: auto;
+            }
+
+            .all-modals-container .modal-content {
+                padding: 15px;
+                border-radius: 12px;
+            }
+
+            .all-modals-container .modal-title {
+                font-size: 1rem;
+            }
+
+            .all-modals-container .modal-section {
+                margin-bottom: 12px;
+            }
+
+            .all-modals-container .modal-section h3 {
+                font-size: 0.9rem;
+                margin-bottom: 6px;
+            }
+
+            .all-modals-container .modal-section li {
+                font-size: 0.8rem;
+                padding: 5px 0 5px 22px;
+                line-height: 1.4;
+            }
+
+            .all-modals-container .close-button {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+                margin-top: 10px;
+            }
+
+            /* Canvas de partículas removido */
+        }
+
+        /* Smartphones muito pequenos */
+        @media (max-width: 480px) {
+            body {
+                padding-top: 0;
+                padding-bottom: 100px;
+            }
+
+            .page-title {
+                font-size: 1.2rem;
+                letter-spacing: 2px;
+                margin-bottom: 15px;
+                margin-top: 25px !important;
+                padding-top: 0;
+            }
+
+            /* Timeline em telas pequenas */
+            .timeline-strip {
+                height: 45px;
+                margin-bottom: 10px;
+            }
+
+            .timeline-label {
+                font-size: 0.45rem;
+                letter-spacing: 0.3px;
+            }
+
+            .timeline-year {
+                font-size: 0.85rem;
+                letter-spacing: 0.5px;
+            }
+
+            .container {
+                padding: 15px;
+                gap: 15px;
+            }
+
+            .central-button {
+                padding: 15px 20px;
+                font-size: 0.85rem;
+                width: 95%;
+            }
+
+            .branch-button {
+                padding: 14px 20px;
+                font-size: 0.8rem;
+                width: 95%;
+            }
+
+            .branch-button .material-icons {
+                font-size: 1.2rem;
+            }
+
+            .modal-title {
+                font-size: 1.1rem;
+            }
+
+            .modal-section h3 {
+                font-size: 0.95rem;
+            }
+
+            .modal-section li {
+                font-size: 0.85rem;
+            }
+
+            .all-modals-container .modal-title {
+                font-size: 0.9rem;
+            }
+
+            .all-modals-container .modal-section h3 {
+                font-size: 0.85rem;
+            }
+
+            .all-modals-container .modal-section li {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Landscape em smartphones */
+        @media (max-width: 896px) and (orientation: landscape) {
+            .container {
+                height: 100vh;
+            }
+
+            .central-button {
+                width: 100px;
+                height: 100px;
+                font-size: 0.8rem;
+            }
+
+            .branch-button {
+                padding: 8px 14px;
+                font-size: 0.75rem;
+            }
+
+            .btn-2026 {
+                top: 12%;
+            }
+
+            .btn-2028 {
+                bottom: 12%;
+            }
+
+            .modal-overlay:not(.all-open) .modal-content {
+                max-height: 90vh;
+            }
+
+            .all-modals-container {
+                max-height: 90vh;
+            }
+        }
+
+        /* Scrollbar personalizada para o modal */
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #00cc66;
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: #00994d;
+        }
+
+        /* Scrollbar personalizada para o container de todos os modais */
+        .all-modals-container::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .all-modals-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .all-modals-container::-webkit-scrollbar-thumb {
+            background: #00cc66;
+            border-radius: 10px;
+        }
+
+        .all-modals-container::-webkit-scrollbar-thumb:hover {
+            background: #00E67A;
+        }
+    </style>
+</head>
+<body>
+    <!-- Título Principal -->
+    <h1 class="page-title" id="page-title"></h1>
+    
+    <!-- Faixa de Timeline -->
+    <div class="timeline-strip">
+        <div class="timeline-item timeline-2026">
+            <span class="timeline-label">Ano 1</span>
+            <span class="timeline-year">2026</span>
+        </div>
+        <div class="timeline-item timeline-2027">
+            <span class="timeline-label">Ano 2 e 3</span>
+            <span class="timeline-year">2027 e 2028</span>
+        </div>
+        <div class="timeline-item timeline-2028">
+            <span class="timeline-label">Ano 4</span>
+            <span class="timeline-year">2029</span>
+        </div>
+        <div class="timeline-item timeline-2030">
+            <span class="timeline-label">Ano 5 a 8</span>
+            <span class="timeline-year">2030-2033</span>
+        </div>
+    </div>
+    
+    <!-- Seção de Descrição -->
+    <section class="description-section">
+        <div class="description-content">
+            <h2 class="description-title">Entenda a Reforma Tributária</h2>
+            <p class="description-text">
+                A <strong>Reforma Tributária Brasileira</strong> representa a maior transformação do sistema fiscal do país em décadas. 
+                Com implementação gradual entre <strong>2026 e 2033</strong>, ela visa simplificar a complexa estrutura de impostos, 
+                unificando tributos como PIS, COFINS, ICMS e ISS em um modelo mais moderno e eficiente.
+            </p>
+            <p class="description-text">
+                Esta linha do tempo interativa apresenta as principais etapas da transição, seus impactos práticos e o que 
+                empresas e profissionais precisam saber para se preparar adequadamente. Clique em cada período para explorar 
+                as mudanças específicas de cada fase.
+            </p>
+        </div>
+    </section>
+    
+    <!-- Container Principal -->
+    <div class="container">
+        <!-- SVG para Linhas de Conexão -->
+        <svg class="connections-svg" id="connectionsSvg">
+            <!-- Linha para 2026 (Superior Esquerda) -->
+            <line class="connection-line line-2026" id="line-2026" />
+            <circle class="data-pulse" style="color: #4A90E2;">
+                <animateMotion dur="3s" repeatCount="indefinite">
+                    <mpath href="#path-2026" />
+                </animateMotion>
+            </circle>
+            <path id="path-2026" d="" fill="none" stroke="none" />
+
+            <!-- Linha para 2027 (Inferior Esquerda) -->
+            <line class="connection-line line-2027" id="line-2027" />
+            <circle class="data-pulse" style="color: #9B59B6;">
+                <animateMotion dur="3.5s" repeatCount="indefinite">
+                    <mpath href="#path-2027" />
+                </animateMotion>
+            </circle>
+            <path id="path-2027" d="" fill="none" stroke="none" />
+
+            <!-- Linha para 2028-2029 (Inferior Direita) -->
+            <line class="connection-line line-2028" id="line-2028" />
+            <circle class="data-pulse" style="color: #F39C12;">
+                <animateMotion dur="4s" repeatCount="indefinite">
+                    <mpath href="#path-2028" />
+                </animateMotion>
+            </circle>
+            <path id="path-2028" d="" fill="none" stroke="none" />
+
+            <!-- Linha para 2030-2032 (Superior Direita) -->
+            <line class="connection-line line-2030" id="line-2030" />
+            <circle class="data-pulse" style="color: #00cc66;">
+                <animateMotion dur="3.2s" repeatCount="indefinite">
+                    <mpath href="#path-2030" />
+                </animateMotion>
+            </circle>
+            <path id="path-2030" d="" fill="none" stroke="none" />
+        </svg>
+
+        <!-- Botão Central -->
+        <div class="central-button">
+            REFORMA<br>TRIBUTÁRIA
+        </div>
+
+        <!-- Botões Periféricos -->
+        <button class="branch-button btn-2026" data-modal="modal-2026">
+            <span class="material-icons">rocket_launch</span>
+            <span>2026</span>
+        </button>
+        <button class="branch-button btn-2027" data-modal="modal-2027">
+            <span class="material-icons">settings</span>
+            <span>2027</span>
+        </button>
+        <button class="branch-button btn-2028" data-modal="modal-2028">
+            <span class="material-icons">trending_up</span>
+            <span>2028–2029</span>
+        </button>
+        <button class="branch-button btn-2030" data-modal="modal-2030">
+            <span class="material-icons">check_circle</span>
+            <span>2030–2033</span>
+        </button>
+    </div>
+
+    <!-- Botão de Alerta (fora do container) -->
+    <button class="branch-button btn-alerta" data-modal="modal-alerta">
+        <span class="material-icons">warning</span>
+        <span>ALERTA!</span>
+    </button>
+
+    <!-- Modal 2026 -->
+    <div class="modal-overlay" id="modal-2026">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">2026 – Início da Transição Gradual</h2>                <button class="modal-close-btn" onclick="closeModal('modal-2026')">                 <span class="material-icons">close</span>             </button>
+            </div>
+            <div class="modal-section">
+                <h3>O que muda:</h3>
+                <ul>
+                    <li>Início oficial da transição do sistema tributário atual para o novo modelo unificado, com implementação progressiva e acompanhamento técnico.</li>
+                    <li>Entrada em vigor do IBS (Imposto sobre Bens e Serviços) e CBS (Contribuição sobre Bens e Serviços), marcando o primeiro passo rumo à simplificação tributária.</li>
+                    <li>Convivência temporária entre os tributos tradicionais e os novos impostos, garantindo segurança jurídica durante a migração.</li>
+                </ul>
+            </div>
+            <div class="modal-section">
+                <h3>Impactos:</h3>
+                <ul>
+                    <li>Empresas e profissionais contábeis iniciam o processo de adequação aos novos procedimentos fiscais, com suporte de capacitações e orientações oficiais.</li>
+                    <li>Redução gradual da complexidade tributária, preparando o terreno para ganhos futuros de eficiência e competitividade.</li>
+                    <li>Maior previsibilidade nas obrigações fiscais, facilitando o planejamento estratégico das organizações.</li>
+                </ul>
+            </div></div>
+    </div>
+
+    <!-- Modal 2027 -->
+    <div class="modal-overlay" id="modal-2027">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">2027 – Consolidação e Ajustes Estruturais</h2>                <button class="modal-close-btn" onclick="closeModal('modal-2027')">                   <span class="material-icons">close</span>               </button>
+            </div>
+            <div class="modal-section">
+                <h3>O que muda:</h3>
+                <ul>
+                    <li>Unificação da base de cálculo dos tributos sobre consumo, eliminando divergências entre estados e municípios.</li>
+                    <li>Redução progressiva das alíquotas dos tributos antigos, com aumento proporcional do IBS e CBS, mantendo a neutralidade fiscal.</li>
+                    <li>Aperfeiçoamento das regras de transição com base nos aprendizados do primeiro ano de implementação.</li>
+                </ul>
+            </div>
+            <div class="modal-section">
+                <h3>Impactos:</h3>
+                <ul>
+                    <li>Simplificação significativa no preenchimento de declarações fiscais, reduzindo tempo e custos operacionais para as empresas.</li>
+                    <li>Diminuição da carga administrativa e do risco de erros em apurações tributárias.</li>
+                    <li>Maior clareza nas obrigações fiscais, fortalecendo a segurança jurídica e a confiança no ambiente de negócios.</li>
+                </ul>
+            </div></div>
+    </div>
+
+    <!-- Modal 2028-2029 -->
+    <div class="modal-overlay" id="modal-2028">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">2028–2029 – Plena Operação do Novo Sistema</h2>              <button class="modal-close-btn" onclick="closeModal('modal-2028')">                   <span class="material-icons">close</span>                </button>
+            </div>
+            <div class="modal-section">
+                <h3>O que muda:</h3>
+                <ul>
+                    <li>Sistema tributário totalmente automatizado e integrado, com processos digitais de ponta a ponta.</li>
+                    <li>Extinção definitiva dos tributos antigos (PIS, COFINS, ICMS e ISS), consolidando o modelo unificado de tributação sobre consumo.</li>
+                    <li>Implementação completa de ferramentas tecnológicas para apuração, declaração e pagamento automáticos.</li>
+                </ul>
+            </div>
+            <div class="modal-section">
+                <h3>Impactos:</h3>
+                <ul>
+                    <li>Conclusão da transição para o novo modelo, com ganhos expressivos em eficiência e produtividade para empresas de todos os portes.</li>
+                    <li>Fiscalização digital integrada e inteligente, reduzindo a burocracia e aumentando a transparência nas relações entre fisco e contribuinte.</li>
+                    <li>Eliminação de sobreposições tributárias e da "guerra fiscal" entre estados, promovendo um ambiente de negócios mais equilibrado e competitivo.</li>
+                </ul>
+            </div></div>
+    </div>
+
+    <!-- Modal 2030-2032 -->
+    <div class="modal-overlay" id="modal-2030">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">2030–2033 – Consolidação e Benefícios Plenos</h2>                <button class="modal-close-btn" onclick="closeModal('modal-2030')">                   <span class="material-icons">close</span>                </button>
+            </div>
+            <div class="modal-section">
+                <h3>O que muda:</h3>
+                <ul>
+                    <li>Estabilização definitiva do novo sistema tributário brasileiro, reconhecido como referência em modernização fiscal.</li>
+                    <li>Operações fiscais 100% digitais e automatizadas, com integração total entre sistemas públicos e privados.</li>
+                    <li>Aprimoramento contínuo das ferramentas e processos, com base em dados e inteligência artificial.</li>
+                </ul>
+            </div>
+            <div class="modal-section">
+                <h3>Impactos:</h3>
+                <ul>
+                    <li>Aumento substancial da eficiência tributária, com redução de até 70% no tempo dedicado a obrigações fiscais pelas empresas.</li>
+                    <li>Transparência total nas operações tributárias, fortalecendo a confiança e a conformidade fiscal.</li>
+                    <li>Simplificação definitiva para todos os contribuintes, liberando recursos para inovação, crescimento e geração de empregos.</li>
+                </ul>
+            </div></div>
+    </div>
+
+    <!-- Modal Alerta -->
+    <div class="modal-overlay" id="modal-alerta">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">⚠️ Alerta às empresas!</h2>
+                <button class="modal-close-btn" onclick="closeModal('modal-alerta')">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div class="modal-section">
+                <p style="margin-bottom: 15px; color: rgba(255, 255, 255, 0.9); line-height: 1.6;">A Reforma Tributária trará novas regras fiscais e operacionais — e quem não se preparar pode enfrentar sérios problemas:</p>
+                <ul>
+                    <li>Notas fiscais rejeitadas por erros nas novas regras;</li>
+                    <li>Diferenças de alíquotas e cálculos incorretos de impostos;</li>
+                    <li>Atrasos nas apurações e entregas de obrigações acessórias;</li>
+                    <li>Autuações e penalidades por falhas de adequação;</li>
+                    <li>Sistemas desatualizados incapazes de atender ao novo modelo.</li>
+                </ul>
+            </div>
+            <div class="modal-section">
+                <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.6;"><strong>👉 Antecipe-se!</strong> Revise processos, atualize seus sistemas e conte com suporte contábil especializado para evitar riscos.</p>
+            </div></div>
+    </div>
+
+    <!-- Modal para Todos os Cards (Botão Central) -->
+    <div class="modal-overlay all-open" id="modal-all">
+        <div class="all-modals-container">
+            <!-- Card 2026 -->
+            <div class="modal-content modal-2026">
+                <div class="modal-header">
+                    <h2 class="modal-title">2026 – Início da Transição Gradual</h2>                <button class="modal-close-btn" onclick="closeModal('modal-2026')">                   <span class="material-icons">close</span>                </button>
+                </div>
+                <div class="modal-section">
+                    <h3>O que muda:</h3>
+                    <ul>
+                        <li>Início oficial da transição do sistema tributário atual para o novo modelo unificado.</li>
+                        <li>Entrada em vigor do IBS e CBS, marcando o primeiro passo rumo à simplificação tributária.</li>
+                        <li>Convivência temporária entre tributos tradicionais e novos impostos.</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Impactos:</h3>
+                    <ul>
+                        <li>Empresas iniciam adequação aos novos procedimentos fiscais.</li>
+                        <li>Redução gradual da complexidade tributária.</li>
+                        <li>Maior previsibilidade nas obrigações fiscais.</li>
+                    </ul>
+                </div></div>
+
+            <!-- Card 2027 -->
+            <div class="modal-content modal-2027">
+                <div class="modal-header">
+                    <h2 class="modal-title">2027 – Consolidação e Ajustes Estruturais</h2>                <button class="modal-close-btn" onclick="closeModal('modal-2027')">                    <span class="material-icons">close</span>                </button>
+                </div>
+                <div class="modal-section">
+                    <h3>O que muda:</h3>
+                    <ul>
+                        <li>Unificação da base de cálculo dos tributos sobre consumo.</li>
+                        <li>Redução progressiva das alíquotas dos tributos antigos.</li>
+                        <li>Aperfeiçoamento das regras de transição.</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Impactos:</h3>
+                    <ul>
+                        <li>Simplificação significativa no preenchimento de declarações fiscais.</li>
+                        <li>Diminuição da carga administrativa e do risco de erros.</li>
+                        <li>Maior clareza nas obrigações fiscais.</li>
+                    </ul>
+                </div></div>
+
+            <!-- Card 2028-2029 -->
+            <div class="modal-content modal-2028">
+                <div class="modal-header">
+                    <h2 class="modal-title">2028–2029 – Plena Operação do Novo Sistema</h2>                <button class="modal-close-btn" onclick="closeModal('modal-2028')">                    <span class="material-icons">close</span>                </button>
+                </div>
+                <div class="modal-section">
+                    <h3>O que muda:</h3>
+                    <ul>
+                        <li>Sistema tributário totalmente automatizado e integrado.</li>
+                        <li>Extinção definitiva dos tributos antigos (PIS, COFINS, ICMS e ISS).</li>
+                        <li>Implementação completa de ferramentas tecnológicas.</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Impactos:</h3>
+                    <ul>
+                        <li>Ganhos expressivos em eficiência e produtividade.</li>
+                        <li>Fiscalização digital integrada e inteligente.</li>
+                        <li>Eliminação da "guerra fiscal" entre estados.</li>
+                    </ul>
+                </div></div>
+
+            <!-- Card 2030-2032 -->
+            <div class="modal-content modal-2030">
+                <div class="modal-header">
+                    <h2 class="modal-title">2030–2032 – Consolidação e Benefícios Plenos</h2>                <button class="modal-close-btn" onclick="closeModal('modal-2030')">                    <span class="material-icons">close</span>                </button>
+                </div>
+                <div class="modal-section">
+                    <h3>O que muda:</h3>
+                    <ul>
+                        <li>Estabilização definitiva do novo sistema tributário brasileiro.</li>
+                        <li>Operações fiscais 100% digitais e automatizadas.</li>
+                        <li>Aprimoramento contínuo com base em dados e IA.</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Impactos:</h3>
+                    <ul>
+                        <li>Redução de até 70% no tempo dedicado a obrigações fiscais.</li>
+                        <li>Transparência total nas operações tributárias.</li>
+                        <li>Simplificação definitiva, liberando recursos para inovação.</li>
+                    </ul>
+                </div></div>
+
+            <!-- Card Alerta -->
+            <div class="modal-content modal-alerta">
+                <div class="modal-header">
+                    <h2 class="modal-title">⚠️ Alerta às empresas!</h2>
+                </div>
+                <div class="modal-section">
+                    <p style="margin-bottom: 10px; color: rgba(255, 255, 255, 0.9); font-size: 0.85rem; line-height: 1.5;">A Reforma Tributária trará novas regras fiscais e operacionais — e quem não se preparar pode enfrentar sérios problemas:</p>
+                    <ul>
+                        <li>Notas fiscais rejeitadas;</li>
+                        <li>Cálculos incorretos de impostos;</li>
+                        <li>Atrasos nas obrigações;</li>
+                        <li>Autuações e penalidades;</li>
+                        <li>Sistemas desatualizados.</li>
+                    </ul>
+                    <p style="margin-top: 10px; color: rgba(255, 255, 255, 0.9); font-size: 0.85rem;"><strong>👉 Antecipe-se!</strong> Revise processos e atualize sistemas.</p>
+                </div></div>
+        </div>
+    </div>
+
+    <script>
+        // ========== EFEITO DE DIGITAÇÃO NO TÍTULO ==========
+        const titleElement = document.getElementById('page-title');
+        const titleText = 'Cronograma para a Reforma Tributária';
+        let charIndex = 0;
+
+        function typeWriter() {
+            if (charIndex < titleText.length) {
+                titleElement.textContent += titleText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 80); // Velocidade de digitação (80ms por caractere)
+            } else {
+                // Remove o cursor piscante após terminar
+                setTimeout(() => {
+                    titleElement.classList.add('typing-complete');
+                }, 500);
+            }
+        }
+
+        // Inicia o efeito de digitação quando a página carrega
+        window.addEventListener('load', () => {
+            setTimeout(typeWriter, 300); // Pequeno delay antes de começar
+        });
+
+        // ========== CONTROLE DE MODAIS ==========
+        
+        // Seleciona todos os botões que abrem modais
+        const branchButtons = document.querySelectorAll('.branch-button');
+        const modalOverlays = document.querySelectorAll('.modal-overlay');
+        const centralButton = document.querySelector('.central-button');
+        const timelineItems = document.querySelectorAll('.timeline-item');
+
+        // Desktop: Timeline abre modais
+        const isDesktop = () => window.innerWidth >= 769;
+
+        // Mapeamento timeline -> modal
+        const timelineModalMap = {
+            0: 'modal-2026',
+            1: 'modal-2027',
+            2: 'modal-2028',
+            3: 'modal-2030'
+        };
+
+        // Adiciona evento de clique na timeline (apenas desktop)
+        timelineItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                if (isDesktop()) {
+                    const modalId = timelineModalMap[index];
+                    if (modalId) {
+                        // Remove active de todos os itens da timeline
+                        timelineItems.forEach(ti => ti.classList.remove('active'));
+                        // Adiciona active no item clicado
+                        item.classList.add('active');
+                        // Abre o modal
+                        openModal(modalId);
+                    }
+                }
+            });
+        });
+
+        // Adiciona evento de clique no botão central para abrir todos os modais
+        if (centralButton) {
+            centralButton.addEventListener('click', () => {
+                openAllModals();
+            });
+        }
+
+        // Adiciona evento de clique em cada botão periférico (mobile)
+        branchButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const modalId = button.getAttribute('data-modal');
+                openModal(modalId);
+            });
+        });
+
+        // Função para abrir modal individual
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Previne scroll do body
+            }
+        }
+
+        // Função para fechar modal individual
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Restaura scroll do body
+                // Remove active da timeline
+                timelineItems.forEach(ti => ti.classList.remove('active'));
+            }
+        }
+
+        // Função para abrir todos os modais (botão central)
+        function openAllModals() {
+            const allModalsOverlay = document.getElementById('modal-all');
+            if (allModalsOverlay) {
+                allModalsOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Função para fechar todos os modais
+        function closeAllModals() {
+            const allModalsOverlay = document.getElementById('modal-all');
+            if (allModalsOverlay) {
+                allModalsOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Fecha modal ao clicar no overlay (fora do conteúdo)
+        modalOverlays.forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    // Se for o modal de todos, fecha com a função específica
+                    if (overlay.id === 'modal-all') {
+                        closeAllModals();
+                    } else {
+                        overlay.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
+                }
+            });
+        });
+
+        // Fecha modal ao pressionar a tecla ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                // Verifica se o modal de todos está aberto
+                const allModalsOverlay = document.getElementById('modal-all');
+                if (allModalsOverlay && allModalsOverlay.classList.contains('active')) {
+                    closeAllModals();
+                } else {
+                    // Fecha modais individuais
+                    modalOverlays.forEach(overlay => {
+                        if (overlay.classList.contains('active')) {
+                            overlay.classList.remove('active');
+                            document.body.style.overflow = 'auto';
+                        }
+                    });
+                }
+            }
+        });
+
+        // ========== ANIMAÇÕES DE ENTRADA ==========
+        
+        // Adiciona delay progressivo nas animações dos botões
+        const buttons = document.querySelectorAll('.branch-button');
+        buttons.forEach((button, index) => {
+            button.style.animationDelay = `${0.2 + (index * 0.1)}s`;
+        });
+
+        // ========== ATUALIZAÇÃO DINÂMICA DAS LINHAS SVG ==========
+        
+        function updateConnectionLines() {
+            const container = document.querySelector('.container');
+            const centralButton = document.querySelector('.central-button');
+            const buttons = {
+                '2026': document.querySelector('.btn-2026'),
+                '2027': document.querySelector('.btn-2027'),
+                '2028': document.querySelector('.btn-2028'),
+                '2030': document.querySelector('.btn-2030')
+            };
+
+            if (!container || !centralButton) return;
+
+            const containerRect = container.getBoundingClientRect();
+            const centralRect = centralButton.getBoundingClientRect();
+            
+            // Calcula o centro do botão central relativo ao container
+            const centerX = centralRect.left + centralRect.width / 2 - containerRect.left;
+            const centerY = centralRect.top + centralRect.height / 2 - containerRect.top;
+
+            // Atualiza cada linha
+            Object.keys(buttons).forEach(year => {
+                const button = buttons[year];
+                const line = document.getElementById(`line-${year}`);
+                const path = document.getElementById(`path-${year}`);
+                
+                if (!button || !line || !path) return;
+
+                const buttonRect = button.getBoundingClientRect();
+                const buttonX = buttonRect.left + buttonRect.width / 2 - containerRect.left;
+                const buttonY = buttonRect.top + buttonRect.height / 2 - containerRect.top;
+
+                // Define as coordenadas da linha
+                line.setAttribute('x1', centerX);
+                line.setAttribute('y1', centerY);
+                line.setAttribute('x2', buttonX);
+                line.setAttribute('y2', buttonY);
+
+                // Define o path para animação dos círculos
+                path.setAttribute('d', `M ${centerX} ${centerY} L ${buttonX} ${buttonY}`);
+            });
+        }
+
+        // Atualiza as linhas quando a página carrega
+        window.addEventListener('load', updateConnectionLines);
+        
+        // Atualiza as linhas quando a janela é redimensionada
+        window.addEventListener('resize', updateConnectionLines);
+        
+        // Atualiza após um pequeno delay para garantir que tudo está renderizado
+        setTimeout(updateConnectionLines, 100);
+
+        // ========== SISTEMA DE PARTÍCULAS NEURAIS - REMOVIDO ==========
+    </script>
+</body>
+</html>
