@@ -20,7 +20,7 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: #000000 url('background.jpg') no-repeat center center fixed;
+            background: #000000 url('background-2.jpg') no-repeat center center fixed;
             background-size: cover;
             min-height: 100vh;
             display: flex;
@@ -200,6 +200,15 @@
         }
 
         /* Cores dos períodos com efeito neon */
+        .timeline-2025 {
+            background: linear-gradient(145deg, #FF6B9D 0%, #C44569 100%);
+            border-left-color: #C44569;
+        }
+
+        .timeline-2025::after {
+            border-left-color: #C44569;
+        }
+
         .timeline-2026 {
             background: linear-gradient(145deg, #4A90E2 0%, #357ABD 100%);
             border-left-color: #357ABD;
@@ -367,6 +376,46 @@
         }
 
         /* Cores e posições dos botões - Formando um quadrado perfeito (ordem horária) */
+        .btn-2025 {
+            background: linear-gradient(145deg, #FF6B9D 0%, #E91E63 50%, #C44569 100%);
+            top: 5%;
+            left: 15%;
+            transform: translateY(0);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.6),
+                        0 4px 12px rgba(255, 107, 157, 0.4),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                        inset 0 -2px 10px rgba(0, 0, 0, 0.2),
+                        0 0 35px rgba(255, 107, 157, 0.4);
+            overflow: hidden;
+        }
+
+        .btn-2025::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(180deg, 
+                rgba(255, 255, 255, 0.5) 0%, 
+                rgba(255, 255, 255, 0.15) 50%, 
+                transparent 100%);
+            border-radius: 25px 25px 0 0;
+            pointer-events: none;
+        }
+
+        .btn-2025:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(255, 107, 157, 0.8),
+                        0 6px 18px rgba(255, 107, 157, 0.6),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                        inset 0 -2px 10px rgba(0, 0, 0, 0.2),
+                        0 0 50px rgba(255, 107, 157, 0.6);
+            border-color: rgba(255, 255, 255, 0.7);
+            filter: brightness(1.15) saturate(1.2);
+        }
+
         .btn-2026 {
             background: linear-gradient(145deg, #5BA3F5 0%, #4A90E2 50%, #357ABD 100%);
             top: 5%;
@@ -381,7 +430,6 @@
             overflow: hidden;
         }
 
-        /* Efeito de brilho superior no botão 2026 */
         .btn-2026::before {
             content: '';
             position: absolute;
@@ -397,7 +445,16 @@
             pointer-events: none;
         }
 
-        /* Brilho animado deslizante no botão 2026 - DESATIVADO para performance */
+        .btn-2026:hover {
+            transform: translateX(-50%) translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(74, 144, 226, 0.8),
+                        0 6px 18px rgba(74, 144, 226, 0.6),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                        inset 0 -2px 10px rgba(0, 0, 0, 0.2),
+                        0 0 50px rgba(74, 144, 226, 0.6);
+            border-color: rgba(255, 255, 255, 0.7);
+            filter: brightness(1.15) saturate(1.2);
+        }
 
         .btn-2027 {
             background: linear-gradient(145deg, #B370CF 0%, #9B59B6 50%, #8E44AD 100%);
@@ -413,7 +470,6 @@
             overflow: hidden;
         }
 
-        /* Efeito de brilho superior no botão 2027 */
         .btn-2027::before {
             content: '';
             position: absolute;
@@ -429,7 +485,16 @@
             pointer-events: none;
         }
 
-        /* Brilho animado deslizante no botão 2027 - DESATIVADO para performance */
+        .btn-2027:hover {
+            transform: translateY(-50%) translateX(5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(155, 89, 182, 0.8),
+                        0 6px 18px rgba(155, 89, 182, 0.6),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                        inset 0 -2px 10px rgba(0, 0, 0, 0.2),
+                        0 0 50px rgba(155, 89, 182, 0.6);
+            border-color: rgba(255, 255, 255, 0.7);
+            filter: brightness(1.15) saturate(1.2);
+        }
 
         .btn-2028 {
             background: linear-gradient(145deg, #FFB347 0%, #F39C12 50%, #E67E22 100%);
@@ -445,7 +510,6 @@
             overflow: hidden;
         }
 
-        /* Efeito de brilho superior no botão 2028 */
         .btn-2028::before {
             content: '';
             position: absolute;
@@ -461,7 +525,16 @@
             pointer-events: none;
         }
 
-        /* Brilho animado deslizante no botão 2028 - DESATIVADO para performance */
+        .btn-2028:hover {
+            transform: translateX(-50%) translateY(5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(243, 156, 18, 0.8),
+                        0 6px 18px rgba(243, 156, 18, 0.6),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                        inset 0 -2px 10px rgba(0, 0, 0, 0.2),
+                        0 0 50px rgba(243, 156, 18, 0.6);
+            border-color: rgba(255, 255, 255, 0.7);
+            filter: brightness(1.15) saturate(1.2);
+        }
 
         .btn-2030 {
             background: linear-gradient(145deg, #00E67A 0%, #00cc66 50%, #00994d 100%);
@@ -477,7 +550,6 @@
             overflow: hidden;
         }
 
-        /* Efeito de brilho superior no botão 2030 */
         .btn-2030::before {
             content: '';
             position: absolute;
@@ -491,6 +563,17 @@
                 transparent 100%);
             border-radius: 25px 25px 0 0;
             pointer-events: none;
+        }
+
+        .btn-2030:hover {
+            transform: translateY(-50%) translateX(-5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(0, 204, 102, 0.8),
+                        0 6px 18px rgba(0, 204, 102, 0.6),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                        inset 0 -2px 10px rgba(0, 0, 0, 0.2),
+                        0 0 50px rgba(0, 204, 102, 0.6);
+            border-color: rgba(255, 255, 255, 0.7);
+            filter: brightness(1.15) saturate(1.2);
         }
 
         /* ========== BOTÃO DE ALERTA ========== */
@@ -525,7 +608,6 @@
         
         .btn-alerta .material-icons {
             font-size: 1.3rem;
-            line-height: 1;
         }
 
         .btn-alerta::before {
@@ -596,6 +678,7 @@
             }
 
             /* Modais da timeline como dropdown (exceto modal-all e modal-alerta) */
+            #modal-2025.active,
             #modal-2026.active,
             #modal-2027.active,
             #modal-2028.active,
@@ -609,13 +692,14 @@
             }
 
             /* Conteúdo do dropdown */
+            #modal-2025 .modal-content,
             #modal-2026 .modal-content,
             #modal-2027 .modal-content,
             #modal-2028 .modal-content,
             #modal-2030 .modal-content {
                 position: fixed;
                 top: calc(25px + 60px + 8px);
-                width: 25%;
+                width: 20%;
                 height: calc(100vh - 25px - 60px - 8px);
                 margin: 0;
                 padding: 25px;
@@ -630,20 +714,24 @@
             }
 
             /* Posicionamento horizontal de cada modal */
-            #modal-2026 .modal-content {
+            #modal-2025 .modal-content {
                 left: 0;
             }
 
+            #modal-2026 .modal-content {
+                left: 20%;
+            }
+
             #modal-2027 .modal-content {
-                left: 25%;
+                left: 40%;
             }
 
             #modal-2028 .modal-content {
-                left: 50%;
+                left: 60%;
             }
 
             #modal-2030 .modal-content {
-                left: 75%;
+                left: 80%;
             }
 
             @keyframes slideDown {
@@ -886,6 +974,30 @@
 
         /* ========== ESTILOS ESPECÍFICOS POR MODAL (CORES NEON) ========== */
         
+        /* Modal 2025 - Rosa */
+        #modal-2025 .modal-content {
+            border-color: #FF6B9D;
+            box-shadow: 0 20px 60px rgba(255, 107, 157, 0.4),
+                        0 0 40px rgba(255, 107, 157, 0.2) inset;
+        }
+
+        #modal-2025 .modal-title {
+            color: #FF6B9D;
+        }
+
+        #modal-2025 .modal-section h3 {
+            color: #FF6B9D;
+        }
+
+        #modal-2025 .modal-section li::before {
+            color: #FF6B9D;
+        }
+
+        #modal-2025 .close-button {
+            border-color: #FF6B9D;
+            color: #FF6B9D;
+        }
+
         /* Modal 2026 - Azul */
         #modal-2026 .modal-content {
             border-color: #4A90E2;
@@ -1015,6 +1127,30 @@
 
         /* ========== CORES PARA MODAIS NO GRID (TODOS ABERTOS) ========== */
         
+        /* Modal 2025 - Rosa (Grid) */
+        .modal-2025 {
+            border-color: #FF6B9D !important;
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4),
+                        0 0 30px rgba(255, 107, 157, 0.2) inset !important;
+        }
+
+        .modal-2025 .modal-title {
+            color: #FF6B9D;
+        }
+
+        .modal-2025 .modal-section h3 {
+            color: #FF6B9D;
+        }
+
+        .modal-2025 .modal-section li::before {
+            color: #FF6B9D;
+        }
+
+        .modal-2025 .close-button {
+            border-color: #FF6B9D;
+            color: #FF6B9D;
+        }
+
         /* Modal 2026 - Azul (Grid) */
         .modal-2026 {
             border-color: #4A90E2 !important;
@@ -1438,23 +1574,74 @@
             }
         }
 
-        /* Scrollbar personalizada para o modal */
+        /* Scrollbar personalizada para cada modal - Base */
         .modal-content::-webkit-scrollbar {
             width: 8px;
         }
 
         .modal-content::-webkit-scrollbar-track {
-            background: #f1f1f1;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
         }
 
-        .modal-content::-webkit-scrollbar-thumb {
+        /* Scrollbar Modal 2025 - Rosa */
+        #modal-2025 .modal-content::-webkit-scrollbar-thumb {
+            background: #FF6B9D;
+            border-radius: 10px;
+        }
+
+        #modal-2025 .modal-content::-webkit-scrollbar-thumb:hover {
+            background: #E91E63;
+        }
+
+        /* Scrollbar Modal 2026 - Azul */
+        #modal-2026 .modal-content::-webkit-scrollbar-thumb {
+            background: #4A90E2;
+            border-radius: 10px;
+        }
+
+        #modal-2026 .modal-content::-webkit-scrollbar-thumb:hover {
+            background: #5BA3F5;
+        }
+
+        /* Scrollbar Modal 2027 - Roxo */
+        #modal-2027 .modal-content::-webkit-scrollbar-thumb {
+            background: #9B59B6;
+            border-radius: 10px;
+        }
+
+        #modal-2027 .modal-content::-webkit-scrollbar-thumb:hover {
+            background: #B370CF;
+        }
+
+        /* Scrollbar Modal 2028 - Laranja */
+        #modal-2028 .modal-content::-webkit-scrollbar-thumb {
+            background: #F39C12;
+            border-radius: 10px;
+        }
+
+        #modal-2028 .modal-content::-webkit-scrollbar-thumb:hover {
+            background: #FFB347;
+        }
+
+        /* Scrollbar Modal 2030 - Verde */
+        #modal-2030 .modal-content::-webkit-scrollbar-thumb {
             background: #00cc66;
             border-radius: 10px;
         }
 
-        .modal-content::-webkit-scrollbar-thumb:hover {
-            background: #00994d;
+        #modal-2030 .modal-content::-webkit-scrollbar-thumb:hover {
+            background: #00E67A;
+        }
+
+        /* Scrollbar Modal Alerta - Vermelho */
+        #modal-alerta .modal-content::-webkit-scrollbar-thumb {
+            background: #FF4444;
+            border-radius: 10px;
+        }
+
+        #modal-alerta .modal-content::-webkit-scrollbar-thumb:hover {
+            background: #FF6666;
         }
 
         /* Scrollbar personalizada para o container de todos os modais */
@@ -1475,6 +1662,76 @@
         .all-modals-container::-webkit-scrollbar-thumb:hover {
             background: #00E67A;
         }
+
+        /* Scrollbars para cards individuais no grid (modal-all) */
+        .all-modals-container .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .all-modals-container .modal-content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        /* Card 2025 - Rosa */
+        .all-modals-container .modal-2025::-webkit-scrollbar-thumb {
+            background: #FF6B9D;
+            border-radius: 10px;
+        }
+
+        .all-modals-container .modal-2025::-webkit-scrollbar-thumb:hover {
+            background: #E91E63;
+        }
+
+        /* Card 2026 - Azul */
+        .all-modals-container .modal-2026::-webkit-scrollbar-thumb {
+            background: #4A90E2;
+            border-radius: 10px;
+        }
+
+        .all-modals-container .modal-2026::-webkit-scrollbar-thumb:hover {
+            background: #5BA3F5;
+        }
+
+        /* Card 2027 - Roxo */
+        .all-modals-container .modal-2027::-webkit-scrollbar-thumb {
+            background: #9B59B6;
+            border-radius: 10px;
+        }
+
+        .all-modals-container .modal-2027::-webkit-scrollbar-thumb:hover {
+            background: #B370CF;
+        }
+
+        /* Card 2028 - Laranja */
+        .all-modals-container .modal-2028::-webkit-scrollbar-thumb {
+            background: #F39C12;
+            border-radius: 10px;
+        }
+
+        .all-modals-container .modal-2028::-webkit-scrollbar-thumb:hover {
+            background: #FFB347;
+        }
+
+        /* Card 2030 - Verde */
+        .all-modals-container .modal-2030::-webkit-scrollbar-thumb {
+            background: #00cc66;
+            border-radius: 10px;
+        }
+
+        .all-modals-container .modal-2030::-webkit-scrollbar-thumb:hover {
+            background: #00E67A;
+        }
+
+        /* Card Alerta - Vermelho */
+        .all-modals-container .modal-alerta::-webkit-scrollbar-thumb {
+            background: #FF4444;
+            border-radius: 10px;
+        }
+
+        .all-modals-container .modal-alerta::-webkit-scrollbar-thumb:hover {
+            background: #FF6666;
+        }
     </style>
 </head>
 <body>
@@ -1483,6 +1740,10 @@
     
     <!-- Faixa de Timeline -->
     <div class="timeline-strip">
+        <div class="timeline-item timeline-2025">
+            <span class="timeline-label">Preparação</span>
+            <span class="timeline-year">2025</span>
+        </div>
         <div class="timeline-item timeline-2026">
             <span class="timeline-label">Ano 1</span>
             <span class="timeline-year">2026</span>
@@ -1522,6 +1783,15 @@
     <div class="container">
         <!-- SVG para Linhas de Conexão -->
         <svg class="connections-svg" id="connectionsSvg">
+            <!-- Linha para 2025 -->
+            <line class="connection-line line-2025" id="line-2025" />
+            <circle class="data-pulse" style="color: #FF6B9D;">
+                <animateMotion dur="2.8s" repeatCount="indefinite">
+                    <mpath href="#path-2025" />
+                </animateMotion>
+            </circle>
+            <path id="path-2025" d="" fill="none" stroke="none" />
+
             <!-- Linha para 2026 (Superior Esquerda) -->
             <line class="connection-line line-2026" id="line-2026" />
             <circle class="data-pulse" style="color: #4A90E2;">
@@ -1565,6 +1835,10 @@
         </div>
 
         <!-- Botões Periféricos -->
+        <button class="branch-button btn-2025" data-modal="modal-2025">
+            <span class="material-icons">info</span>
+            <span>2025</span>
+        </button>
         <button class="branch-button btn-2026" data-modal="modal-2026">
             <span class="material-icons">rocket_launch</span>
             <span>2026</span>
@@ -1589,11 +1863,40 @@
         <span>ALERTA!</span>
     </button>
 
+    <!-- Modal 2025 -->
+    <div class="modal-overlay" id="modal-2025">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">2025 – Preparação e Testes</h2>
+                <button class="modal-close-btn" onclick="closeModal('modal-2025')">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div class="modal-section">
+                <h3>Fase de Testes:</h3>
+                <ul>
+                    <li>As empresas, independente do regime tributário, não estão obrigadas a preencher os campos relativos à Reforma Tributária na hora de preencher a NF-e e a NFC-e.</li>
+                    <li>Foi disponibilizado em 01/10/2025 os testes para os sistemas. As informações de tributação relativas ao IBS, CBS e IS serão opcionais e só serão validadas se os campos forem preenchidos.</li>
+                </ul>
+            </div>
+            <div class="modal-section">
+                <h3>Atenção:</h3>
+                <ul>
+                    <li>A partir de janeiro de 2026, as novas regras de validação referentes à tributação do IBS e da CBS serão aplicadas obrigatoriamente.</li>
+                    <li>Este é o momento ideal para testar e adequar seus sistemas antes da obrigatoriedade.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal 2026 -->
     <div class="modal-overlay" id="modal-2026">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">2026 – Início da Transição Gradual</h2>                <button class="modal-close-btn" onclick="closeModal('modal-2026')">                 <span class="material-icons">close</span>             </button>
+                <h2 class="modal-title">2026 – Início da Transição Gradual</h2>
+                <button class="modal-close-btn" onclick="closeModal('modal-2026')">
+                    <span class="material-icons">close</span>
+                </button>
             </div>
             <div class="modal-section">
                 <h3>O que muda:</h3>
@@ -1712,6 +2015,30 @@
     <!-- Modal para Todos os Cards (Botão Central) -->
     <div class="modal-overlay all-open" id="modal-all">
         <div class="all-modals-container">
+            <!-- Card 2025 -->
+            <div class="modal-content modal-2025">
+                <div class="modal-header">
+                    <h2 class="modal-title">2025 – Preparação e Testes</h2>
+                    <button class="modal-close-btn" onclick="closeModal('modal-2025')">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <div class="modal-section">
+                    <h3>Fase de Testes:</h3>
+                    <ul>
+                        <li>Empresas não obrigadas a preencher campos da Reforma na NF-e e NFC-e.</li>
+                        <li>Testes disponíveis desde 01/10/2025. Informações de IBS, CBS e IS são opcionais.</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Atenção:</h3>
+                    <ul>
+                        <li>A partir de janeiro de 2026, validação obrigatória do IBS e CBS.</li>
+                        <li>Momento ideal para testar e adequar sistemas.</li>
+                    </ul>
+                </div>
+            </div>
+
             <!-- Card 2026 -->
             <div class="modal-content modal-2026">
                 <div class="modal-header">
@@ -1866,10 +2193,11 @@
 
         // Mapeamento timeline -> modal
         const timelineModalMap = {
-            0: 'modal-2026',
-            1: 'modal-2027',
-            2: 'modal-2028',
-            3: 'modal-2030'
+            0: 'modal-2025',
+            1: 'modal-2026',
+            2: 'modal-2027',
+            3: 'modal-2028',
+            4: 'modal-2030'
         };
 
         // Adiciona evento de clique na timeline (apenas desktop)
@@ -1990,6 +2318,7 @@
             const container = document.querySelector('.container');
             const centralButton = document.querySelector('.central-button');
             const buttons = {
+                '2025': document.querySelector('.btn-2025'),
                 '2026': document.querySelector('.btn-2026'),
                 '2027': document.querySelector('.btn-2027'),
                 '2028': document.querySelector('.btn-2028'),
