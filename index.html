@@ -1334,21 +1334,56 @@
                 padding-top: 0;
             }
 
-            /* Timeline em mobile */
+            /* Timeline em mobile - Layout vertical */
             .timeline-strip {
-                height: 50px;
-                margin-bottom: 15px;
+                flex-direction: column;
+                height: auto;
+                margin-bottom: 20px;
+                gap: 0;
+                width: 95%;
+                max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .timeline-item {
+                width: 100%;
+                min-height: 60px;
+                padding: 12px 15px;
+                border-radius: 0;
+                border: 2px solid rgba(255, 255, 255, 0.2);
+                border-bottom: none;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .timeline-item:first-child {
+                border-radius: 10px 10px 0 0;
+            }
+
+            .timeline-item:last-child {
+                border-radius: 0 0 10px 10px;
+                border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            }
+
+            .timeline-item:hover,
+            .timeline-item:active {
+                transform: scale(1.02);
+                z-index: 10;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
             }
 
             .timeline-label {
-                font-size: 0.55rem;
-                letter-spacing: 0.5px;
+                font-size: 0.65rem;
+                letter-spacing: 0.8px;
+                margin-bottom: 3px;
             }
 
-    .timeline-year {
-        font-size: 0.85rem;
-        letter-spacing: 0.8px;
-    }
+            .timeline-year {
+                font-size: 1rem;
+                letter-spacing: 1px;
+                font-weight: 900;
+            }
 
     .container {
         display: none;
@@ -1478,20 +1513,25 @@
                 padding-top: 0;
             }
 
-            /* Timeline em telas pequenas */
+            /* Timeline em telas muito pequenas - mantém vertical */
             .timeline-strip {
-                height: 45px;
-                margin-bottom: 10px;
+                width: 98%;
+                margin-bottom: 15px;
+            }
+
+            .timeline-item {
+                min-height: 55px;
+                padding: 10px 12px;
             }
 
             .timeline-label {
-                font-size: 0.45rem;
-                letter-spacing: 0.3px;
+                font-size: 0.6rem;
+                letter-spacing: 0.5px;
             }
 
             .timeline-year {
-                font-size: 0.85rem;
-                letter-spacing: 0.5px;
+                font-size: 0.95rem;
+                letter-spacing: 0.8px;
             }
 
             .container {
@@ -2200,19 +2240,20 @@
             4: 'modal-2030'
         };
 
-        // Adiciona evento de clique na timeline (apenas desktop)
+        // Adiciona evento de clique na timeline (desktop e mobile)
         timelineItems.forEach((item, index) => {
             item.addEventListener('click', () => {
-                if (isDesktop()) {
-                    const modalId = timelineModalMap[index];
-                    if (modalId) {
+                const modalId = timelineModalMap[index];
+                if (modalId) {
+                    if (isDesktop()) {
+                        // Desktop: dropdown
                         // Remove active de todos os itens da timeline
                         timelineItems.forEach(ti => ti.classList.remove('active'));
                         // Adiciona active no item clicado
                         item.classList.add('active');
-                        // Abre o modal
-                        openModal(modalId);
                     }
+                    // Abre o modal (funciona em desktop e mobile)
+                    openModal(modalId);
                 }
             });
         });
